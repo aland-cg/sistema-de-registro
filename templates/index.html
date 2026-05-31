@@ -1,23 +1,62 @@
 <html>
-<body>
+    <body>
 
-    <h1>sistema clinico local</h1>
+        <h1>sistema clinico local</h1>
 
-    <form method="POST">
+        <form method="POST">
 
-    <label>Nombre del paciente:</label>
-    <input type="text" name="nombre" placeholder="Ingrese nombre">
+            <section>
+                <h3>identidad</h3>
 
-    <br><br>
+                <label>Nombre:</label>
+                <br>
+                <input type="text" name="nombre" required>
+                <br>
 
-    <label>Edad:</label>
-    <input type="number" name="edad">
+                <label>Edad:</label>
+                <br>
+                <input type="number" name="edad" min="0" max="120" required>
+                <br>
+            </section>
 
-    <br><br>
+            <section>
+                <h3>signos vitales</h3>
 
-    <button type="submit">Registrar</button>
+                <label>Presión arterial:</label>
+                <br>
+                <input type="text" name="ta">
+                <br>
 
-</form>
+                <label>Frecuencia cardiaca:</label>
+                <br>
+                <input type="number" name="fc" min="20" max="250">
+                <br>
+
+                <label>SpO₂:</label>
+                <br>
+                <input type="number" name="spo2" min="50" max="100">
+                <br>
+
+                <label>Temperatura:</label>
+                <br>
+                <input type="number" step="0.1" name="temp" min="30" max="45">
+                <br>
+
+            </section>
+
+            <section>
+                <h3>metabolicos</h3>
+
+                <label>Glucosa:</label>
+                <br>
+                <input type="number" name="glucosa" min="20" max="800">
+                <br>
+
+            </section>
+
+            <button type="submit">Guardar</button>
+
+        </form>
     
-</body>
+    </body>
 </html>

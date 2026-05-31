@@ -14,6 +14,11 @@
             <th>ID</th>
             <th>Nombre</th>
             <th>Edad</th>
+            <th>TA</th>
+            <th>FC</th>
+            <th>SpO₂</th>
+            <th>Glucosa</th>
+            <th>Temp</th>
         </tr>
 
         {% for paciente in pacientes %}
@@ -22,6 +27,11 @@
             <td>{{ paciente[0] }}</td>
             <td>{{ paciente[1] }}</td>
             <td>{{ paciente[2] }}</td>
+            <td>{{ paciente[3] }}</td>
+            <td>{{ paciente[4] }}</td>
+            <td>{{ paciente[5] }}</td>
+            <td>{{ paciente[6] }}</td>
+            <td>{{ paciente[7] }}</td>
         </tr>
 
         {% endfor %}
