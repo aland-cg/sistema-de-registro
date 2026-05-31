@@ -20,8 +20,8 @@ def init_db():
     ta TEXT,
     fc INTEGER,
     spo2 INTEGER,
-    glucosa INTEGER,
-    temp REAL
+    temp REAL,
+    glucosa INTEGER
 );
     """)
 #sirve para guardar cambios 
@@ -43,11 +43,12 @@ def home():
         "ta": request.form["ta"],
         "fc": request.form["fc"],
         "spo2": request.form["spo2"],
+        "temp": request.form["temp"],
         "glucosa": request.form["glucosa"],
-        "temp": request.form["temp"]
+
     }
 
-    # Validaciones
+        # Validaciones
 
         edad = int(paciente["edad"])
 
@@ -64,15 +65,13 @@ def home():
         if spo2 < 50 or spo2 > 100:
             return "Error: Saturación fuera de rango permitido."
 
+        
         glucosa = int(paciente["glucosa"])
 
         if glucosa < 20 or glucosa > 800:
             return "Error: Glucosa fuera de rango permitido."
 
-        temp = float(paciente["temp"])
-
-        if temp < 30 or temp > 45:
-            return "Error: Temperatura fuera de rango permitido."
+        
 
         conn = sqlite3.connect("database.db")
         cursor = conn.cursor()
@@ -80,7 +79,7 @@ def home():
         cursor.execute(
     """
     INSERT INTO pacientes
-    (nombre, edad, ta, fc, spo2, glucosa, temp)
+    (nombre, edad, ta, fc, spo2, temp, glucosa)
     VALUES (?, ?, ?, ?, ?, ?, ?)
     """,
     (
@@ -89,8 +88,8 @@ def home():
         paciente["ta"],
         paciente["fc"],
         paciente["spo2"],
+        paciente["temp"],
         paciente["glucosa"],
-        paciente["temp"]
     )
 )
 
