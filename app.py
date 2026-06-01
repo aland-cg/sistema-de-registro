@@ -2,6 +2,8 @@
 from flask import Flask, render_template, request
 # Importar SQLite para guardar datos
 import sqlite3
+#importar fecha y hora
+from datetime import datetime
 
 # Crear instancia principal de la aplicación Flask
 app = Flask(__name__)
@@ -21,7 +23,9 @@ def init_db():
     fc INTEGER,
     spo2 INTEGER,
     temp REAL,
-    glucosa INTEGER
+    glucosa INTEGER,
+    fecha TEXT,
+    hora TEXT               
 );
     """)
 #sirve para guardar cambios 
@@ -37,6 +41,7 @@ def home():
 
     if request.method == "POST":
 
+        
         paciente = {
         "nombre": request.form["nombre"],
         "edad": request.form["edad"],
@@ -45,8 +50,14 @@ def home():
         "spo2": request.form["spo2"],
         "temp": request.form["temp"],
         "glucosa": request.form["glucosa"],
+        
 
     }
+        #consulta la fecha y hora y la integra al campo de la DB
+        ahora = datetime.now()
+
+        fecha = ahora.strftime("%Y-%m-%d")
+        hora = ahora.strftime("%H:%M:%S")
 
         # Validaciones
 
@@ -65,22 +76,19 @@ def home():
         if spo2 < 50 or spo2 > 100:
             return "Error: Saturación fuera de rango permitido."
 
-        
         glucosa = int(paciente["glucosa"])
 
         if glucosa < 20 or glucosa > 800:
             return "Error: Glucosa fuera de rango permitido."
-
         
-
         conn = sqlite3.connect("database.db")
         cursor = conn.cursor()
 # Insertar datos clínicos del paciente en SQLite
         cursor.execute(
     """
     INSERT INTO pacientes
-    (nombre, edad, ta, fc, spo2, temp, glucosa)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    (nombre, edad, ta, fc, spo2, temp, glucosa, fecha, hora)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """,
     (
         paciente["nombre"],
@@ -90,6 +98,8 @@ def home():
         paciente["spo2"],
         paciente["temp"],
         paciente["glucosa"],
+        fecha,
+        hora
     )
 )
 

@@ -19,6 +19,8 @@
             <th>SpO₂</th>
             <th>Temp</th>
             <th>Glucosa</th>
+            <th>fecha</th>
+            <th>hora</th>
         </tr>
 
         {% for paciente in pacientes %}
@@ -32,6 +34,8 @@
             <td>{{ paciente[5] }}</td>
             <td>{{ paciente[6] }}</td>
             <td>{{ paciente[7] }}</td>
+            <td>{{ paciente[8] }}</td>
+            <td>{{ paciente[9] }}</td>
         </tr>
 
         {% endfor %}
