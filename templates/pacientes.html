@@ -1,46 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Pacientes Registrados</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Pacientes Registrados</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
 
-    <h1>Lista de Pacientes</h1>
+        <h1>Lista de Pacientes</h1>
+        <form method="GET">
 
-    <table border="1">
+            <label>Buscar paciente:</label>
 
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Edad</th>
-            <th>TA</th>
-            <th>FC</th>
-            <th>SpO₂</th>
-            <th>Temp</th>
-            <th>Glucosa</th>
-            <th>fecha</th>
-            <th>hora</th>
-        </tr>
+            <input
+                type="text"
+                name="busqueda"
+                value="{{ busqueda }}"
+                placeholder="Nombre">
 
-        {% for paciente in pacientes %}
+            <button type="submit">
+            Buscar
+            </button>
+            
 
-        <tr>
-            <td>{{ paciente[0] }}</td>
-            <td>{{ paciente[1] }}</td>
-            <td>{{ paciente[2] }}</td>
-            <td>{{ paciente[3] }}</td>
-            <td>{{ paciente[4] }}</td>
-            <td>{{ paciente[5] }}</td>
-            <td>{{ paciente[6] }}</td>
-            <td>{{ paciente[7] }}</td>
-            <td>{{ paciente[8] }}</td>
-            <td>{{ paciente[9] }}</td>
-        </tr>
+        </form>
+        <a href="/pacientes">
+            Ver todos
+        </a>
+        <br>
+        <table class="tabla-pacientes">
 
-        {% endfor %}
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>TA</th>
+                <th>FC</th>
+                <th>SpO₂</th>
+                <th>Temp</th>
+                <th>Glucosa</th>
+                <th>fecha</th>
+                <th>hora</th>
+            </tr>
 
-    </table>
+            {% for paciente in pacientes %}
 
-</body>
+            <tr>
+                <td>{{ paciente[0] }}</td>
+                <td>{{ paciente[1] }}</td>
+                <td>{{ paciente[2] }}</td>
+                <td>{{ paciente[3] }}</td>
+                <td>{{ paciente[4] }}</td>
+                <td>{{ paciente[5] }}</td>
+                <td>{{ paciente[6] }}</td>
+                <td>{{ paciente[7] }}</td>
+                <td>{{ paciente[8] }}</td>
+                <td>{{ paciente[9] }}</td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+    </body>
 </html>

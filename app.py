@@ -114,16 +114,38 @@ def home():
 @app.route("/pacientes")
 def pacientes():
 
+    busqueda = request.args.get("busqueda", "")
+
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM pacientes")
+    if busqueda:
+
+        cursor.execute(
+            """
+            SELECT * FROM pacientes
+            WHERE nombre LIKE ?
+            """,
+            ('%' + busqueda + '%',)
+        )
+
+    else:
+
+        cursor.execute(
+            """
+            SELECT * FROM pacientes
+            """
+        )
 
     datos = cursor.fetchall()
 
     conn.close()
 
-    return render_template("pacientes.html", pacientes=datos)
+    return render_template(
+        "pacientes.html",
+        pacientes=datos,
+        busqueda=busqueda
+    )
 ## Iniciar servidor Flask en modo desarrollo
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
