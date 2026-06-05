@@ -2,11 +2,12 @@
     <head>
         <meta charset="UTF-8">
         <title>Sistema Clínico Local</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
         <h1>sistema clinico local</h1>
         <form method="POST">
-            <section>
+            <section id="identidad">
                 <h3>identidad</h3>
                 <label>Nombre:</label>
                 <br>
@@ -17,7 +18,7 @@
                 <input type="number" name="edad" min="0" max="120" required>
                 <br>
             </section>
-            <section>
+            <section id="signos vitales">
                 <h3>signos vitales</h3>
                 <label>Presión arterial:</label>
                 <br>
@@ -36,7 +37,7 @@
                 <input type="number" step="0.1" name="temp" min="30" max="45">
                 <br>
             </section>
-            <section>
+            <section id="metabolicos">
                 <h3>metabolicos</h3>
                 <label>Glucosa:</label>
                 <br>
